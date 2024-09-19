@@ -3,6 +3,8 @@
 	<%- include('./partials/head.ejs') %>
 
 	<body>
-		<h1>hello world</h1>
+		<% books.map(book => { %>
+		<h1><%= book.title %></h1>
+		<% }) %>
 	</body>
 </html>
