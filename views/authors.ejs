@@ -7,6 +7,10 @@
     <%- include('./partials/header.ejs') %>
 
     <h1>Authors page</h1>
+
+    <% authors.map(author => { %>
+    <h2><%= author.first_name  %></h2>
+    <% }) %>
   </main>
 </body>
 
