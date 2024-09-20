@@ -2,7 +2,7 @@ const pool = require('../db/pool');
 const queries = require('../db/queries');
 
 async function getAllBooks(req, res) {
-	const { rows } = await pool.query(queries.getAllBooks);
+	const { rows } = await pool.query(queries.getAllBooksWithAuthorName);
 	res.render('index', { books: rows });
 }
 
