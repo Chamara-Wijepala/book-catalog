@@ -6,6 +6,9 @@ module.exports = {
 			transitionDuration: {
 				DEFAULT: '300ms',
 			},
+			fontFamily: {
+				alexBrush: ['Alex Brush', 'sans serif'],
+			},
 		},
 	},
 	plugins: [],
