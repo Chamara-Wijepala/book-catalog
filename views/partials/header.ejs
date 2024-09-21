@@ -1,10 +1,51 @@
-<header>
-  <h1>Bookworm</h1>
+<button id="toggle-sidebar" class="sm:hidden absolute z-50 bg-emerald-400 p-1 pr-4 pb-4 rounded-br-full transform transition-all">
+  <img src="https://www.svgrepo.com/show/529002/hamburger-menu.svg" id="hamburger-icon" class="max-w-8">
+  <img src="https://www.svgrepo.com/show/528912/close-circle.svg" id="close-icon" class="hidden max-w-8">
+</button>
 
-  <h2>Browse</h2>
-  <nav>
-    <a href="/">Books</a>
-    <a href="/authors">Authors</a>
-    <a href="/genres">Genres</a>
+<!--
+  Added 'duration-0' to override default tailwind transition duration to prevent
+  sidebar from sliding off screen at page load.
+-->
+<header id="sidebar" class="bg-white sm:p-4 fixed top-0 left-0 w-full h-full transform -translate-x-full transition-transform duration-0">
+
+  <!-- Add and remove top margin to offset button -->
+  <h1 class="text-emerald-400 text-center text-4xl mt-8 sm:mt-0 mb-8">Bookworm</h1>
+
+  <nav class="flex flex-col gap-8 items-center text-xl">
+    <a href="/" class="w-full text-center p-4">Books</a>
+    <a href="/authors" class="w-full text-center p-4">Authors</a>
+    <a href="/genres" class="w-full text-center p-4">Genres</a>
   </nav>
 </header>
+
+<script>
+  const toggleBtn = document.getElementById('toggle-sidebar');
+  const sidebar = document.getElementById('sidebar');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('-translate-x-full')
+    sidebar.classList.toggle('translate-x-0')
+    // Remove transition override applied earlier
+    sidebar.classList.remove('duration-0')
+
+    toggleBtn.classList.toggle('bg-emerald-400')
+    // Toggle visibility of icons
+    hamburgerIcon.classList.toggle('hidden')
+    closeIcon.classList.toggle('hidden')
+  })
+
+  // Add custom styles to anchor tags based on current url
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentUrl = window.location.pathname;
+    const links = document.querySelectorAll('a');
+
+    links.forEach(link => {
+      if (link.getAttribute('href') === currentUrl) {
+        link.classList.add('bg-emerald-100');
+      }
+    });
+  });
+</script>
