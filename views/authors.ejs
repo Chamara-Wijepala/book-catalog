@@ -2,15 +2,24 @@
 <html lang="en">
 <%- include('./partials/head.ejs') %>
 
-<body>
-  <main>
-    <%- include('./partials/header.ejs') %>
+<body class="bg-slate-100 flex h-svh">
+  <%- include('./partials/header.ejs') %>
 
-    <h1>Authors page</h1>
+  <main class="p-4 sm:p-8 overflow-scroll">
+    <h2 class="mt-8 mb-4 text-4xl text-slate-400">Browse by author</h2>
 
-    <% authors.map(author => { %>
-    <h2><%= author.first_name  %></h2>
-    <% }) %>
+    <div class="flex flex-wrap gap-8 justify-center sm:justify-start">
+      <% authors.map(author => { %>
+      <div class="w-32">
+        <div class="bg-slate-400 w-full rounded-full aspect-square flex justify-center items-center">
+          <% if (author.image === null) { %>
+          <p class="text-center text-slate-800">Image not available</p>
+          <% } %>
+        </div>
+        <h3 class="text-center"><%= author.first_name %> <%= author.last_name %></h3>
+      </div>
+      <% }) %>
+    </div>
   </main>
 </body>
 
