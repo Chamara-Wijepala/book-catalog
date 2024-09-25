@@ -13,7 +13,7 @@ async function getAllGenres(req, res) {
 		const result = await pool.query(
 			queries.getBooksWithAuthorNameByGenre,
 			// Pass checkedGenres inside an array because it's length is dynamic
-			[checkedGenres]
+			[checkedGenres, checkedGenres.length]
 		);
 		booksByGenre = result.rows;
 	}

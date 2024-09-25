@@ -23,6 +23,8 @@ const getBooksWithAuthorNameByGenre = `
 	JOIN book_genres ON books.id = book_genres.book_id
 	JOIN genres ON book_genres.genre_id = genres.id
 	WHERE name = ANY ($1)
+	GROUP BY books.id, authors.first_name, authors.last_name
+	HAVING COUNT(DISTINCT genres.id) = $2
 `;
 
 module.exports = {
