@@ -2,15 +2,34 @@
 <html lang="en">
 <%- include('./partials/head.ejs') %>
 
-<body>
-  <main>
-    <%- include('./partials/header.ejs') %>
+<body class="bg-slate-100 flex h-svh">
+  <%- include('./partials/header.ejs') %>
 
-    <h1>Genres page</h1>
-    <% genres.map(genre => { %>
-    <h2><%= genre.name  %></h2>
-    <% }) %>
+  <main class="p-4 sm:p-8 overflow-scroll">
+    <h1 class="mt-8 mb-4 text-4xl text-slate-400">Browse by genre</h1>
+
+    <form id="genres-form" method="get">
+      <% genres.map(genre => { %>
+      <label>
+        <input type="checkbox" name="genre" value="<%= genre.name %>" <%= checkedGenres.includes(genre.name) ? "checked" : "" %>>
+        <%= genre.name %>
+        </input>
+      </label>
+      <% }) %>
+    </form>
   </main>
 </body>
+
+<script>
+  const genresForm = document.getElementById('genres-form')
+  const checkboxes = genresForm.querySelectorAll('input[type="checkbox"]');
+
+  // Submit the form when a checkbox is selected
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      genresForm.submit();
+    })
+  })
+</script>
 
 </html>
