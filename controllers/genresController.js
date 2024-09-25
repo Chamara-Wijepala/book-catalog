@@ -8,7 +8,21 @@ async function getAllGenres(req, res) {
 	let checkedGenres = [];
 	if (req.query.genre) checkedGenres = checkedGenres.concat(req.query.genre);
 
-	res.render('genres', { genres: rows, checkedGenres });
+	let booksByGenre;
+	if (checkedGenres.length > 0) {
+		const result = await pool.query(
+			queries.getBooksWithAuthorNameByGenre,
+			// Pass checkedGenres inside an array because it's length is dynamic
+			[checkedGenres]
+		);
+		booksByGenre = result.rows;
+	}
+
+	res.render('genres', {
+		genres: rows,
+		checkedGenres,
+		booksByGenre,
+	});
 }
 
 module.exports = {

@@ -15,9 +15,20 @@ const getAllBooksWithAuthorName = `
 	JOIN authors ON author_books.author_id = authors.id
 `;
 
+const getBooksWithAuthorNameByGenre = `
+	SELECT cover, title, first_name, last_name
+	FROM books
+	JOIN author_books ON books.id = author_books.book_id
+	JOIN authors ON author_books.author_id = authors.id
+	JOIN book_genres ON books.id = book_genres.book_id
+	JOIN genres ON book_genres.genre_id = genres.id
+	WHERE name = ANY ($1)
+`;
+
 module.exports = {
 	getAllBooks,
 	getAllAuthors,
 	getAllGenres,
 	getAllBooksWithAuthorName,
+	getBooksWithAuthorNameByGenre,
 };

@@ -6,7 +6,7 @@
   <%- include('./partials/header.ejs') %>
 
   <main class="p-4 sm:p-8 overflow-scroll">
-    <h1 class="mt-8 mb-4 text-4xl text-slate-400">Browse by genre</h1>
+    <h2 class="mt-8 mb-4 text-4xl text-slate-400">Browse by genre</h2>
 
     <form id="genres-form" method="get">
       <% genres.map(genre => { %>
@@ -17,6 +17,19 @@
       </label>
       <% }) %>
     </form>
+
+    <% if (booksByGenre) { %>
+    <section>
+      <h2 class="mt-8 mb-4 text-2xl text-slate-400">Books</h2>
+
+      <div class="flex gap-8 flex-wrap justify-center sm:justify-start">
+        <% booksByGenre.map(book => { %>
+        <%- include('../views/partials/book.ejs', {book}) %>
+        <%  }) %>
+      </div>
+    </section>
+    <% } %>
+
   </main>
 </body>
 
