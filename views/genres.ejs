@@ -8,13 +8,13 @@
   <main class="p-4 sm:p-8 overflow-scroll">
     <h2 class="mt-8 mb-4 text-4xl text-slate-400">Browse by genre</h2>
 
-    <form id="genres-form" method="get">
-      <% genres.map(genre => { %>
-      <label>
-        <input type="checkbox" name="genre" value="<%= genre.name %>" <%= checkedGenres.includes(genre.name) ? "checked" : "" %>>
+    <form id="genres-form" method="get" class="flex gap-1">
+      <% genres.map((genre, index) => { %>
+      <input type="checkbox" name="genre" id="input-<%= index %>" value="<%= genre.name %>" <%= checkedGenres.includes(genre.name) ? "checked" : "" %> class="appearance-none">
+      <label for="input-<%= index %>" id="label-<%= index %>" class="bg-white text-slate-800 py-2 px-4 rounded-3xl shadow-md cursor-pointer sm:hover:bg-emerald-200 transition-colors">
         <%= genre.name %>
-        </input>
       </label>
+      </input>
       <% }) %>
     </form>
 
@@ -36,12 +36,18 @@
 <script>
   const genresForm = document.getElementById('genres-form')
   const checkboxes = genresForm.querySelectorAll('input[type="checkbox"]');
+  const labels = genresForm.querySelectorAll('label');
 
-  // Submit the form when a checkbox is selected
   checkboxes.forEach(checkbox => {
+    // Submit the form when a checkbox is selected
     checkbox.addEventListener('change', () => {
       genresForm.submit();
     })
+
+    // Style the label if checkbox is checked
+    if (checkbox.checked) {
+      checkbox.labels[0].classList.add('bg-emerald-300')
+    }
   })
 </script>
 
