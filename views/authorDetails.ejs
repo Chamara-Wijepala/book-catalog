@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+<body class="bg-slate-100 flex h-svh">
+  <%- include('./partials/header.ejs') %>
+
+  <main class="p-4 sm:p-8 overflow-scroll w-full">
+    <section class="flex flex-col md:flex-row max-w-96 md:max-w-full mx-auto bg-slate-200 rounded-md">
+      <div class="bg-slate-400 aspect-square flex justify-center items-center sm:min-w-64 rounded-md">
+        <% if (!author.image) { %>
+        <p class="text-center text-slate-800 m-4">Image not available</p>
+        <% } %>
+      </div>
+
+      <div class="bg-slate-200 w-full p-4 rounded-md">
+        <h2 class="text-4xl text-slate-700"><%= author.first_name %> <%= author.last_name %></h2>
+        <p class="text-slate-600 max-w-[65ch]"><%= author.bio %></p>
+      </div>
+    </section>
+
+  </main>
+</body>
+
+</html>

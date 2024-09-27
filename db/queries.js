@@ -4,6 +4,12 @@ const getAllBooks = `SELECT * FROM books`;
 // author queries
 const getAllAuthors = `SELECT * FROM authors`;
 
+const getAuthorById = `
+SELECT *
+FROM authors
+WHERE id = $1
+`;
+
 // genre queries
 const getAllGenres = `SELECT * FROM genres`;
 
@@ -30,6 +36,7 @@ const getBooksWithAuthorNameByGenre = `
 module.exports = {
 	getAllBooks,
 	getAllAuthors,
+	getAuthorById,
 	getAllGenres,
 	getAllBooksWithAuthorName,
 	getBooksWithAuthorNameByGenre,

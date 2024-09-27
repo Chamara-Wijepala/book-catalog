@@ -6,6 +6,15 @@ async function getAllAuthors(req, res) {
 	res.render('authors', { authors: rows });
 }
 
+async function getAuthorById(req, res) {
+	const { rows } = await pool.query(queries.getAuthorById, [req.params.id]);
+
+	console.log(rows[0]);
+	// res.sendStatus(200);
+	res.render('authorDetails', { author: rows[0] });
+}
+
 module.exports = {
 	getAllAuthors,
+	getAuthorById,
 };
