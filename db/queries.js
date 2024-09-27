@@ -1,6 +1,12 @@
 // book queries
 const getAllBooks = `SELECT * FROM books`;
 
+const getBookById = `
+SELECT cover, title, description, year
+FROM books
+WHERE id = $1
+`;
+
 // author queries
 const getAllAuthors = `SELECT * FROM authors`;
 
@@ -10,19 +16,33 @@ FROM authors
 WHERE id = $1
 `;
 
+const getAuthorByBookId = `
+SELECT authors.id AS id, image, first_name, last_name, bio
+FROM authors
+JOIN author_books ON authors.id = author_books.author_id
+WHERE book_id = $1
+`;
+
 // genre queries
 const getAllGenres = `SELECT * FROM genres`;
 
+const getAllGenresByBookId = `
+SELECT name
+FROM genres
+JOIN book_genres ON genres.id = book_genres.genre_id
+WHERE book_id = $1
+`;
+
 // author_books queries
 const getAllBooksWithAuthorName = `
-	SELECT cover, title, first_name, last_name
+	SELECT books.id AS id, cover, title, first_name, last_name
 	FROM books
 	JOIN author_books ON books.id = author_books.book_id
 	JOIN authors ON author_books.author_id = authors.id
 `;
 
 const getBooksWithAuthorNameByGenre = `
-	SELECT cover, title, first_name, last_name
+	SELECT books.id AS id, cover, title, first_name, last_name
 	FROM books
 	JOIN author_books ON books.id = author_books.book_id
 	JOIN authors ON author_books.author_id = authors.id
@@ -34,7 +54,7 @@ const getBooksWithAuthorNameByGenre = `
 `;
 
 const getBooksByAuthorId = `
-SELECT cover, title, year
+SELECT books.id AS id, cover, title, year
 FROM books
 JOIN author_books ON books.id = author_books.book_id
 WHERE author_id = $1
@@ -42,9 +62,12 @@ WHERE author_id = $1
 
 module.exports = {
 	getAllBooks,
+	getBookById,
 	getAllAuthors,
 	getAuthorById,
+	getAuthorByBookId,
 	getAllGenres,
+	getAllGenresByBookId,
 	getAllBooksWithAuthorName,
 	getBooksWithAuthorNameByGenre,
 	getBooksByAuthorId,

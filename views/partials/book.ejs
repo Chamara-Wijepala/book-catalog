@@ -2,17 +2,19 @@
   This partial is used to conditionally render the book with the author's name
   on the books page, and with the release year on the author details page.
 -->
-<div>
-  <div class="bg-slate-400 w-[12rem] aspect-[1/1.5] flex justify-center items-center rounded-md">
-    <% if (book.cover === null) { %>
-    <p class="text-slate-800">Cover not available</p>
+<a href="/books/<%= book.id %>">
+  <div>
+    <div class="bg-slate-400 w-[12rem] aspect-[1/1.5] flex justify-center items-center rounded-md">
+      <% if (book.cover === null) { %>
+      <p class="text-slate-800">Cover not available</p>
+      <% } %>
+    </div>
+    <h3 class="font-bold mt-3"><%= book.title %></h3>
+    <!-- Conditional rendering -->
+    <% if (book.first_name && book.last_name) { %>
+    <p class="text-slate-500"><%= book.first_name %> <%= book.last_name %></p>
+    <% } else if (book.year) { %>
+    <p class="text-slate-500"><%= book.year %></p>
     <% } %>
   </div>
-  <h3 class="font-bold mt-3"><%= book.title %></h3>
-  <!-- Conditional rendering -->
-  <% if (book.first_name && book.last_name) { %>
-  <p class="text-slate-500"><%= book.first_name %> <%= book.last_name %></p>
-  <% } else if (book.year) { %>
-  <p class="text-slate-500"><%= book.year %></p>
-  <% } %>
-</div>
+</a>
