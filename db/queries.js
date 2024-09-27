@@ -33,6 +33,13 @@ const getBooksWithAuthorNameByGenre = `
 	HAVING COUNT(DISTINCT genres.id) = $2
 `;
 
+const getBooksByAuthorId = `
+SELECT cover, title, year
+FROM books
+JOIN author_books ON books.id = author_books.book_id
+WHERE author_id = $1
+`;
+
 module.exports = {
 	getAllBooks,
 	getAllAuthors,
@@ -40,4 +47,5 @@ module.exports = {
 	getAllGenres,
 	getAllBooksWithAuthorName,
 	getBooksWithAuthorNameByGenre,
+	getBooksByAuthorId,
 };

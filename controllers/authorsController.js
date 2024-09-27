@@ -7,11 +7,14 @@ async function getAllAuthors(req, res) {
 }
 
 async function getAuthorById(req, res) {
-	const { rows } = await pool.query(queries.getAuthorById, [req.params.id]);
+	const authorId = req.params.id;
+	const { rows } = await pool.query(queries.getAuthorById, [authorId]);
+	const authorBooks = await pool.query(queries.getBooksByAuthorId, [authorId]);
 
-	console.log(rows[0]);
-	// res.sendStatus(200);
-	res.render('authorDetails', { author: rows[0] });
+	res.render('authorDetails', {
+		author: rows[0],
+		authorBooks: authorBooks.rows,
+	});
 }
 
 module.exports = {

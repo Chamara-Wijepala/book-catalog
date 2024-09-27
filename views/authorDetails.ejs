@@ -19,6 +19,15 @@
       </div>
     </section>
 
+    <section>
+      <h2 class="mt-8 mb-4 text-2xl text-slate-400">Books</h2>
+
+      <div class="flex gap-8 flex-wrap justify-center sm:justify-start">
+        <% authorBooks.map(book => { %>
+        <%- include('../views/partials/book.ejs', {book}) %>
+        <% }) %>
+      </div>
+    </section>
   </main>
 </body>
 
