@@ -25,6 +25,14 @@ async function getAllGenres(req, res) {
 	});
 }
 
+async function createGenre(req, res) {
+	const genreName = req.body.genre;
+	await pool.query(queries.createGenre, [genreName]);
+
+	res.redirect('/genres');
+}
+
 module.exports = {
 	getAllGenres,
+	createGenre,
 };

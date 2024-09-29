@@ -33,6 +33,10 @@ JOIN book_genres ON genres.id = book_genres.genre_id
 WHERE book_id = $1
 `;
 
+const createGenre = `
+INSERT INTO genres (name) VALUES ($1)
+`;
+
 // author_books queries
 const getAllBooksWithAuthorName = `
 	SELECT books.id AS id, cover, title, first_name, last_name
@@ -68,6 +72,7 @@ module.exports = {
 	getAuthorByBookId,
 	getAllGenres,
 	getAllGenresByBookId,
+	createGenre,
 	getAllBooksWithAuthorName,
 	getBooksWithAuthorNameByGenre,
 	getBooksByAuthorId,
