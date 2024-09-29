@@ -17,7 +17,20 @@ async function getAuthorById(req, res) {
 	});
 }
 
+async function createAuthor(req, res) {
+	const { body } = req;
+	const image = body.image === '' ? null : body.image;
+	const firstName = body.first_name;
+	const lastName = body.last_name === '' ? null : body.last_name;
+	const bio = body.bio === '' ? null : body.bio;
+
+	await pool.query(queries.createAuthor, [image, firstName, lastName, bio]);
+
+	res.redirect('/authors');
+}
+
 module.exports = {
 	getAllAuthors,
 	getAuthorById,
+	createAuthor,
 };

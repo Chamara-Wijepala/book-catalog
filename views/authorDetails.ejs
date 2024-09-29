@@ -7,9 +7,11 @@
 
   <main class="p-4 sm:p-8 overflow-scroll w-full">
     <section class="flex flex-col md:flex-row max-w-96 md:max-w-full mx-auto bg-slate-200 rounded-md">
-      <div class="bg-slate-400 aspect-square flex justify-center items-center sm:min-w-64 rounded-md">
+      <div class="bg-slate-400 flex justify-center items-center min-h-64 sm:min-w-64 max-w-96 rounded-md overflow-hidden">
         <% if (!author.image) { %>
         <p class="text-center text-slate-800 m-4">Image not available</p>
+        <% } else {%>
+        <img src="<%= author.image %>" class="max-w-full max-h-full">
         <% } %>
       </div>
 

@@ -4,6 +4,7 @@
 
 <body class="bg-slate-100 flex h-svh">
   <%- include('./partials/header.ejs') %>
+  <%- include('./partials/modal.ejs', {partial: 'authorModal.ejs'}) %>
 
   <main class="p-4 sm:p-8 overflow-scroll">
     <h2 class="mt-8 mb-4 text-4xl text-slate-400">Browse by author</h2>
@@ -12,12 +13,14 @@
       <% authors.map(author => { %>
       <a href="/authors/<%= author.id %>">
         <div class="w-32">
-          <div class="bg-slate-400 w-full rounded-full aspect-square flex justify-center items-center">
-            <% if (author.image === null) { %>
+          <div class="bg-slate-400 w-full rounded-full aspect-square flex justify-center items-center overflow-hidden">
+            <% if (!author.image) { %>
             <p class="text-center text-slate-800">Image not available</p>
+            <% } else { %>
+            <div class="bg-[url(<%= author.image %>)] bg-cover bg-center w-full h-full"></div>
             <% } %>
           </div>
-          <h3 class="text-center"><%= author.first_name %> <%= author.last_name %></h3>
+          <h3 class="text-center break-words"><%= author.first_name %> <%= author.last_name %></h3>
         </div>
       </a>
       <% }) %>
