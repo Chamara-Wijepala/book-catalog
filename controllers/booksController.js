@@ -20,7 +20,15 @@ async function getBookById(req, res) {
 	});
 }
 
+async function newBook(req, res) {
+	const authors = await pool.query(queries.getAllAuthors);
+	const genres = await pool.query(queries.getAllGenres);
+
+	res.render('createBook', { authors: authors.rows, genres: genres.rows });
+}
+
 module.exports = {
 	getAllBooks,
 	getBookById,
+	newBook,
 };

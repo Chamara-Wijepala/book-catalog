@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+<body class="bg-slate-100 flex h-svh">
+  <%- include('./partials/header.ejs') %>
+
+  <main class="p-4 sm:p-8 overflow-scroll w-full">
+    <div class="mx-auto max-w-[32rem]">
+      <h2 class="mt-8 mb-4 text-4xl text-slate-800">Add a new book</h2>
+
+      <form method="post" class="flex flex-col">
+        <label for="book-cover">Cover url:</label>
+        <input type="text" name="cover" id="book-cover" class="mb-4 appearance-none outline-none border border-slate-300 py-1 px-2 rounded-md">
+
+        <label for="book-title">Title*:</label>
+        <input type="text" name="title" id="book-title" class="mb-4 appearance-none outline-none border border-slate-300 py-1 px-2 rounded-md">
+
+        <label for="book-description">Description:</label>
+        <input type="text" name="description" id="book-description" class="mb-4 appearance-none outline-none border border-slate-300 py-1 px-2 rounded-md">
+
+        <label for="book-release-year">Year:</label>
+        <input type="number" name="year" id="book-release-year" class="mb-4 appearance-none outline-none border border-slate-300 py-1 px-2 rounded-md">
+
+        <section id="author-selection" class="mb-4">
+          <h3 class="text-xl text-slate-800 mb-2">Select author</h3>
+
+          <div class="flex gap-4 flex-wrap justify-around">
+            <% authors.map(author => { %>
+            <label for="author-<%= author.id %>" class="cursor-pointer">
+              <div class="w-20 relative">
+                <span class="bg-emerald-400 p-1 w-8 h-8 absolute top-0 right-0 rounded-full transition-opacity opacity-0">
+                  <img src="https://www.svgrepo.com/show/528887/check-circle.svg">
+                </span>
+
+                <div class="bg-slate-400 w-full rounded-full aspect-square flex justify-center items-center overflow-hidden">
+                  <% if (!author.image) { %>
+                  <p class="text-center text-slate-800">Image not available</p>
+                  <% } else { %>
+                  <div class="bg-[url(<%= author.image %>)] bg-cover bg-center w-full h-full"></div>
+                  <% } %>
+                </div>
+                <p class="text-center break-words text-sm"><%= author.first_name %> <%= author.last_name %></p>
+              </div>
+            </label>
+            <input type="radio" name="id" id="author-<%= author.id %>" class="hidden">
+            <% }) %>
+          </div>
+        </section>
+
+        <!-- User needs to select one or more from a list of genres. Checkbox -->
+        <section id="genre-selection">
+          <h3 class="text-xl text-slate-800 mb-2">Select genres</h3>
+
+          <div class="flex gap-1 flex-wrap">
+            <% genres.map((genre, index) => { %>
+            <input type="checkbox" name="genre" id="genre-<%= index %>" value="<%= genre.name %>" class="appearance-none">
+            <label for="genre-<%= index %>" id="label-<%= index %>" class="bg-white text-slate-800 py-2 px-4 rounded-3xl shadow-md cursor-pointer sm:hover:bg-emerald-200 transition-colors">
+              <%= genre.name %>
+            </label>
+            </input>
+            <% }) %>
+          </div>
+        </section>
+
+        <button type="submit" class="bg-emerald-400 py-2 px-4 rounded-lg my-4">Add Book</button>
+      </form>
+    </div>
+  </main>
+</body>
+
+<script>
+  const authorSelection = document.getElementById('author-selection')
+  const radioInputs = authorSelection.querySelectorAll('input[type="radio"]')
+  const selectionCheckMarks = authorSelection.querySelectorAll('span')
+
+  const genreSelection = document.getElementById('genre-selection')
+  const checkboxes = genreSelection.querySelectorAll('input[type="checkbox"]')
+  const genreLabels = genreSelection.querySelectorAll('label')
+
+  radioInputs.forEach((input, index) => {
+    // Show checkmark on page load
+    if (input.checked) {
+      selectionCheckMarks[index].classList.remove('opacity-0')
+    }
+
+    input.addEventListener('change', () => {
+      // Hide checkmark on each label
+      selectionCheckMarks.forEach(checkMark => {
+        checkMark.classList.add('opacity-0')
+      })
+
+      // Show checkmark on each label
+      if (input.checked) {
+        selectionCheckMarks[index].classList.remove('opacity-0')
+      }
+    })
+  })
+
+  checkboxes.forEach((checkbox, index) => {
+    if (checkbox.checked) {
+      genreLabels[index].classList.remove('bg-white')
+      genreLabels[index].classList.add('bg-emerald-300')
+    } else if (!checkbox.checked) {
+      genreLabels[index].classList.remove('bg-emerald-300')
+      genreLabels[index].classList.add('bg-white')
+    }
+
+    checkbox.addEventListener('click', () => {
+      if (checkbox.checked) {
+        genreLabels[index].classList.remove('bg-white')
+        genreLabels[index].classList.add('bg-emerald-300')
+      } else if (!checkbox.checked) {
+        genreLabels[index].classList.remove('bg-emerald-300')
+        genreLabels[index].classList.add('bg-white')
+      }
+    })
+  })
+</script>
+
+</html>
