@@ -53,7 +53,7 @@
 
           <div class="flex gap-1 flex-wrap">
             <% genres.map((genre, index) => { %>
-            <input type="checkbox" name="genre" id="genre-<%= index %>" value="<%= genre.name %>" class="appearance-none">
+            <input type="checkbox" name="genre" id="genre-<%= index %>" value="<%= genre.id %>" class="appearance-none">
             <label for="genre-<%= index %>" id="label-<%= index %>" class="bg-white text-slate-800 py-2 px-4 rounded-3xl shadow-md cursor-pointer sm:hover:bg-emerald-200 transition-colors">
               <%= genre.name %>
             </label>
