@@ -37,7 +37,7 @@
                   <% if (!author.image) { %>
                   <p class="text-center text-slate-800">Image not available</p>
                   <% } else { %>
-                  <div class="bg-[url(<%= author.image %>)] bg-cover bg-center w-full h-full"></div>
+                  <div class="bg-cover bg-center w-full h-full" style="background-image: url('<%= author.image %>');"></div>
                   <% } %>
                 </div>
                 <p class="text-center break-words text-sm"><%= author.first_name %> <%= author.last_name %></p>
