@@ -51,8 +51,8 @@ INSERT INTO genres (name) VALUES ($1)
 const getAllBooksWithAuthorName = `
 	SELECT books.id AS id, cover, title, first_name, last_name
 	FROM books
-	JOIN author_books ON books.id = author_books.book_id
-	JOIN authors ON author_books.author_id = authors.id
+	LEFT OUTER JOIN author_books ON books.id = author_books.book_id
+	LEFT OUTER JOIN authors ON author_books.author_id = authors.id
 `;
 
 const getBooksWithAuthorNameByGenre = `
