@@ -7,6 +7,12 @@ FROM books
 WHERE id = $1
 `;
 
+const createBook = `
+INSERT INTO books (cover, title, description, year)
+VALUES ($1, $2, $3, $4)
+RETURNING id
+`;
+
 // author queries
 const getAllAuthors = `SELECT * FROM authors`;
 
@@ -68,9 +74,20 @@ JOIN author_books ON books.id = author_books.book_id
 WHERE author_id = $1
 `;
 
+const createAuthorBookRelation = `
+INSERT INTO author_books (author_id, book_id) VALUES ($1, $2)
+`;
+
+// book_genres queries
+const createBookGenreRelation = `
+INSERT INTO book_genres (book_id, genre_id)
+SELECT $1, UNNEST($2::int[])
+`;
+
 module.exports = {
 	getAllBooks,
 	getBookById,
+	createBook,
 	getAllAuthors,
 	getAuthorById,
 	getAuthorByBookId,
@@ -81,4 +98,6 @@ module.exports = {
 	getAllBooksWithAuthorName,
 	getBooksWithAuthorNameByGenre,
 	getBooksByAuthorId,
+	createAuthorBookRelation,
+	createBookGenreRelation,
 };
