@@ -43,12 +43,11 @@
                 <p class="text-center break-words text-sm"><%= author.first_name %> <%= author.last_name %></p>
               </div>
             </label>
-            <input type="radio" name="id" id="author-<%= author.id %>" class="hidden">
+            <input type="radio" name="author_id" id="author-<%= author.id %>" value="<%= author.id %>" class="hidden">
             <% }) %>
           </div>
         </section>
 
-        <!-- User needs to select one or more from a list of genres. Checkbox -->
         <section id="genre-selection">
           <h3 class="text-xl text-slate-800 mb-2">Select genres</h3>
 
