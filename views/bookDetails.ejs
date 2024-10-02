@@ -43,9 +43,11 @@
 
       <div class="flex gap-4 flex-col md:flex-row">
         <a href="/authors/<%= author.id %>">
-          <div class="bg-slate-400 max-w-48 rounded-full aspect-square flex justify-center items-center">
-            <% if (author.image === null) { %>
+          <div class="bg-slate-400 w-32 max-w-48 rounded-full aspect-square flex justify-center items-center overflow-hidden">
+            <% if (!author.image) { %>
             <p class="text-center text-slate-800">Image not available</p>
+            <% } else { %>
+            <div class="bg-cover bg-center w-full h-full" style="background-image: url('<%= author.image %>');"></div>
             <% } %>
           </div>
         </a>
