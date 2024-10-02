@@ -9,7 +9,7 @@
   <main class="p-4 sm:p-8 overflow-scroll">
     <h2 class="mt-8 mb-4 text-4xl text-slate-400">Browse by genre</h2>
 
-    <form id="genres-form" method="get" class="flex gap-1">
+    <form id="genres-form" method="get" class="flex gap-1 flex-wrap">
       <% genres.map((genre, index) => { %>
       <input type="checkbox" name="genre" id="input-<%= index %>" value="<%= genre.name %>" <%= checkedGenres.includes(genre.name) ? "checked" : "" %> class="appearance-none">
       <label for="input-<%= index %>" id="label-<%= index %>" class="bg-white text-slate-800 py-2 px-4 rounded-3xl shadow-md cursor-pointer sm:hover:bg-emerald-200 transition-colors">
