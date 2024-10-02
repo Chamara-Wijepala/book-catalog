@@ -7,9 +7,13 @@
 
   <main class="p-4 sm:p-8 overflow-scroll w-full">
     <section class="flex flex-col md:flex-row max-w-96 md:max-w-full mx-auto bg-slate-200 rounded-md">
-      <div class="bg-slate-400 aspect-[1/1.5] flex justify-center items-center sm:min-w-64 rounded-md">
+      <div class="bg-slate-400 flex justify-center items-center sm:min-w-64 rounded-md max-w-[12rem] overflow-hidden">
         <% if (!book.cover) { %>
-        <p class="text-center text-slate-800 m-4">Cover not available</p>
+        <div class="w-full h-full aspect-[1/1.5] bg-slate-400 flex justify-center items-center">
+          <p class="text-slate-800">Cover not available</p>
+        </div>
+        <% } else { %>
+        <img src="<%= book.cover %>" class="max-w-full max-h-full">
         <% } %>
       </div>
 

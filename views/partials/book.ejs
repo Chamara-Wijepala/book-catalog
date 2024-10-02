@@ -4,9 +4,13 @@
 -->
 <a href="/books/<%= book.id %>">
   <div class="max-w-[12rem] break-words">
-    <div class="bg-slate-400 w-[12rem] aspect-[1/1.5] flex justify-center items-center rounded-md">
-      <% if (book.cover === null) { %>
-      <p class="text-slate-800">Cover not available</p>
+    <div class="w-[12rem] aspect-[1/1.5] flex justify-center items-center rounded-md over overflow-hidden">
+      <% if (!book.cover) { %>
+      <div class="w-full h-full bg-slate-400 flex justify-center items-center">
+        <p class="text-slate-800">Cover not available</p>
+      </div>
+      <% } else { %>
+      <img src="<%= book.cover %>" class="max-w-full max-h-full rounded-md">
       <% } %>
     </div>
     <h3 class="font-bold mt-3"><%= book.title %></h3>
